@@ -199,6 +199,8 @@
             min-height: 100vh;
             padding: 40px 20px;
             animation: fadeInStep 0.8s ease;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .step-container.active {
@@ -872,7 +874,7 @@
     </div>
 
     <!-- Step 1: Login -->
-    <div class="step-container active" id="step1">
+    <div class="step-container active" id="step1" style="opacity: 1;">
         <div class="login-box">
             <h1>✨ Something Special ✨</h1>
             <p class="subtitle">For someone who makes every moment beautiful</p>
@@ -1122,15 +1124,25 @@
                 4: 'Almost there...'
             };
 
-            showLoader('GHAZAL', loaderMessages[current] || 'Loading...', () => {
-                goToStep(current + 1);
-            });
+            // Hide current step immediately
+            document.getElementById('step' + current).style.opacity = '0';
+            
+            setTimeout(() => {
+                showLoader('GHAZAL', loaderMessages[current] || 'Loading...', () => {
+                    goToStep(current + 1);
+                });
+            }, 300);
         }
 
         function prevStep(current) {
-            showLoader('GHAZAL', 'Going back...', () => {
-                goToStep(current - 1);
-            });
+            // Hide current step immediately
+            document.getElementById('step' + current).style.opacity = '0';
+            
+            setTimeout(() => {
+                showLoader('GHAZAL', 'Going back...', () => {
+                    goToStep(current - 1);
+                });
+            }, 300);
         }
 
         function showLoader(text, message, callback) {
@@ -1156,13 +1168,18 @@
 
         // Finish Journey with beautiful animation
         function finishJourney() {
-            showLoader('GHAZAL', 'Forever in my heart...', () => {
-                goToStep('Final');
-                createHeartExplosion();
-                setTimeout(() => {
-                    createMultipleHearts();
-                }, 1000);
-            });
+            // Hide current step immediately
+            document.getElementById('step5').style.opacity = '0';
+            
+            setTimeout(() => {
+                showLoader('GHAZAL', 'Forever in my heart...', () => {
+                    goToStep('Final');
+                    createHeartExplosion();
+                    setTimeout(() => {
+                        createMultipleHearts();
+                    }, 1000);
+                });
+            }, 300);
         }
 
         // Create heart explosion effect
@@ -1198,25 +1215,37 @@
 
         // Restart journey
         function restartJourney() {
-            showLoader('GHAZAL', 'Taking you back...', () => {
-                goToStep(2);
-            });
+            // Hide current step immediately
+            document.getElementById('stepFinal').style.opacity = '0';
+            
+            setTimeout(() => {
+                showLoader('GHAZAL', 'Taking you back...', () => {
+                    goToStep(2);
+                });
+            }, 300);
         }
 
         // Modified goToStep to handle 'Final' step
         function goToStep(step) {
             document.querySelectorAll('.step-container').forEach(container => {
                 container.classList.remove('active');
+                container.style.opacity = '0';
             });
             
-            if (step === 'Final') {
-                document.getElementById('stepFinal').classList.add('active');
-            } else {
-                document.getElementById('step' + step).classList.add('active');
-                currentStep = step;
-            }
-            
-            window.scrollTo(0, 0);
+            setTimeout(() => {
+                if (step === 'Final') {
+                    const finalStep = document.getElementById('stepFinal');
+                    finalStep.classList.add('active');
+                    finalStep.style.opacity = '1';
+                } else {
+                    const currentStepEl = document.getElementById('step' + step);
+                    currentStepEl.classList.add('active');
+                    currentStepEl.style.opacity = '1';
+                    currentStep = step;
+                }
+                
+                window.scrollTo(0, 0);
+            }, 50);
         }
 
         // Logout function with beautiful message
@@ -1230,22 +1259,34 @@
             
             const randomMessage = logoutMessages[Math.floor(Math.random() * logoutMessages.length)];
             
-            showLoader('GOODBYE', randomMessage, () => {
-                // Hide logout button
-                document.getElementById('logoutBtn').classList.remove('show');
-                
-                // Clear inputs
-                document.getElementById('username').value = '';
-                document.getElementById('password').value = '';
-                document.getElementById('errorMsg').style.display = 'none';
-                
-                // Go back to login
-                document.querySelectorAll('.step-container').forEach(container => {
-                    container.classList.remove('active');
+            // Hide current step immediately
+            const activeStep = document.querySelector('.step-container.active');
+            if (activeStep) {
+                activeStep.style.opacity = '0';
+            }
+            
+            setTimeout(() => {
+                showLoader('GOODBYE', randomMessage, () => {
+                    // Hide logout button
+                    document.getElementById('logoutBtn').classList.remove('show');
+                    
+                    // Clear inputs
+                    document.getElementById('username').value = '';
+                    document.getElementById('password').value = '';
+                    document.getElementById('errorMsg').style.display = 'none';
+                    
+                    // Go back to login
+                    document.querySelectorAll('.step-container').forEach(container => {
+                        container.classList.remove('active');
+                        container.style.opacity = '0';
+                    });
+                    
+                    const loginStep = document.getElementById('step1');
+                    loginStep.classList.add('active');
+                    loginStep.style.opacity = '1';
+                    currentStep = 1;
                 });
-                document.getElementById('step1').classList.add('active');
-                currentStep = 1;
-            });
+            }, 300);
             
             // Create farewell hearts
             for(let i = 0; i < 20; i++) {
