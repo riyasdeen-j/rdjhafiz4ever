@@ -1100,12 +1100,17 @@
             const errorMsg = document.getElementById('errorMsg');
             
             if (username === 'ghazal hafizha' && password === '143hafizha') {
-                showLoader('GHAZAL', 'Welcome to something beautiful...', () => {
-                    goToStep(2);
-                    // Show logout button
-                    document.getElementById('logoutBtn').classList.add('show');
-                });
-                createMultipleHearts();
+                // Hide login page immediately for smooth transition
+                document.getElementById('step1').style.opacity = '0';
+                
+                setTimeout(() => {
+                    showLoader('GHAZAL', 'Welcome to something beautiful...', () => {
+                        goToStep(2);
+                        // Show logout button
+                        document.getElementById('logoutBtn').classList.add('show');
+                    });
+                    createMultipleHearts();
+                }, 300);
             } else {
                 errorMsg.style.display = 'block';
                 const loginBox = document.querySelector('.login-box');
