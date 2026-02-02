@@ -1,1327 +1,1318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>For Someone Special ✨</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .bg-circle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            animation: float-circle 20s infinite;
-        }
-
-        .bg-circle:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            left: 10%;
-            animation-duration: 25s;
-        }
-
-        .bg-circle:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            top: 60%;
-            right: 15%;
-            animation-duration: 30s;
-            animation-delay: 5s;
-        }
-
-        .bg-circle:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            bottom: 20%;
-            left: 20%;
-            animation-duration: 35s;
-            animation-delay: 10s;
-        }
-
-        .bg-circle:nth-child(4) {
-            width: 250px;
-            height: 250px;
-            top: 30%;
-            right: 25%;
-            animation-duration: 28s;
-            animation-delay: 3s;
-        }
-
-        @keyframes float-circle {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-                opacity: 0.3;
-            }
-            25% {
-                transform: translate(50px, -50px) scale(1.1);
-                opacity: 0.5;
-            }
-            50% {
-                transform: translate(-30px, 30px) scale(0.9);
-                opacity: 0.3;
-            }
-            75% {
-                transform: translate(30px, 50px) scale(1.05);
-                opacity: 0.4;
-            }
-        }
-
-        /* Floating hearts animation */
-        .hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .heart {
-            position: absolute;
-            font-size: 20px;
-            opacity: 0;
-            animation: float 8s infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) scale(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.7;
-            }
-            90% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-100px) scale(1) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Custom Loader */
-        .loader-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-
-        .loader-container.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loader-content {
-            text-align: center;
-        }
-
-        .loader-text {
-            font-size: 48px;
-            color: white;
-            font-weight: bold;
-            letter-spacing: 5px;
-            margin-bottom: 30px;
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% {
-                text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
-                             0 0 40px rgba(255, 255, 255, 0.3);
-            }
-            50% {
-                text-shadow: 0 0 30px rgba(255, 255, 255, 0.8),
-                             0 0 60px rgba(255, 255, 255, 0.5);
-            }
-        }
-
-        .loader-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
-            border-radius: 50%;
-            margin: 0 auto;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loader-message {
-            color: white;
-            font-size: 18px;
-            margin-top: 20px;
-            opacity: 0.9;
-        }
-
-        /* Step Container */
-        .step-container {
-            position: relative;
-            z-index: 10;
-            display: none;
-            min-height: 100vh;
-            padding: 40px 20px;
-            animation: fadeInStep 0.8s ease;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .step-container.active {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        @keyframes fadeInStep {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Login Step */
-        .login-box {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 50px 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 450px;
-            width: 100%;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .login-box h1 {
-            color: #764ba2;
-            font-size: 36px;
-            margin-bottom: 10px;
-            text-align: center;
-            line-height: 1.2;
-        }
-
-        .login-box .subtitle {
-            color: #666;
-            margin-bottom: 35px;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-
-        .input-group {
-            margin-bottom: 25px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            color: #555;
-            margin-bottom: 8px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s;
-            font-family: 'Georgia', serif;
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: #764ba2;
-            box-shadow: 0 0 15px rgba(118, 75, 162, 0.3);
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(118, 75, 162, 0.4);
-        }
-
-        .error-message {
-            color: #e74c3c;
-            font-size: 14px;
-            margin-top: 15px;
-            display: none;
-        }
-
-        /* Logout Button */
-        .logout-btn {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            padding: 12px 25px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #764ba2;
-            border: 2px solid rgba(118, 75, 162, 0.3);
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 1000;
-            display: none;
-            font-family: 'Georgia', serif;
-            backdrop-filter: blur(10px);
-        }
-
-        .logout-btn.show {
-            display: block;
-            animation: slideInRight 0.5s ease;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .logout-btn:hover {
-            background: #764ba2;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
-        }
-
-        /* Content Box for Steps */
-        .content-box {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 60px 50px;
-            max-width: 900px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            position: relative;
-        }
-
-        /* Welcome Step */
-        .welcome-section {
-            text-align: center;
-        }
-
-        .welcome-section h1 {
-            font-size: 52px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
-            animation: slideDown 1s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .special-date {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 18px 35px;
-            border-radius: 50px;
-            font-size: 20px;
-            margin: 25px 0;
-            animation: pulse 2s infinite;
-            box-shadow: 0 10px 30px rgba(118, 75, 162, 0.3);
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        .welcome-message {
-            font-size: 22px;
-            color: #666;
-            margin-top: 25px;
-            line-height: 1.8;
-        }
-
-        /* Greeting Step */
-        .greeting-box {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            padding: 45px;
-            border-radius: 18px;
-            font-size: 22px;
-            line-height: 1.9;
-            color: #555;
-            text-align: center;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-            margin-bottom: 20px;
-        }
-
-        /* Timeline Step */
-        .timeline-header {
-            text-align: center;
-            color: #764ba2;
-            margin-bottom: 40px;
-            font-size: 38px;
-        }
-
-        .timeline {
-            margin: 30px 0;
-        }
-
-        .timeline-item {
-            display: flex;
-            margin: 35px 0;
-            opacity: 0;
-            animation: slideInTimeline 0.8s ease forwards;
-        }
-
-        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
-        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
-        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
-        .timeline-item:nth-child(4) { animation-delay: 0.8s; }
-
-        @keyframes slideInTimeline {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .timeline-icon {
-            font-size: 45px;
-            margin-right: 25px;
-            min-width: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .timeline-content {
-            flex: 1;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            border-left: 5px solid #764ba2;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .timeline-content:hover {
-            transform: translateX(10px);
-        }
-
-        .timeline-content h3 {
-            color: #764ba2;
-            margin-bottom: 12px;
-            font-size: 22px;
-        }
-
-        .timeline-content p {
-            color: #666;
-            line-height: 1.7;
-            font-size: 17px;
-        }
-
-        /* Final Step */
-        .final-message {
-            text-align: center;
-            padding: 45px;
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            border-radius: 18px;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-        }
-
-        .final-message h2 {
-            color: #764ba2;
-            font-size: 42px;
-            margin-bottom: 25px;
-        }
-
-        .final-message p {
-            font-size: 22px;
-            color: #555;
-            line-height: 1.9;
-        }
-
-        .promise-list {
-            margin: 30px 0;
-            font-size: 20px;
-        }
-
-        .promise-list div {
-            margin: 15px 0;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 10px;
-        }
-
-        /* Navigation Buttons */
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
-            gap: 20px;
-        }
-
-        .nav-btn {
-            padding: 15px 35px;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Georgia', serif;
-        }
-
-        .nav-btn.prev {
-            background: rgba(118, 75, 162, 0.1);
-            color: #764ba2;
-            flex: 1;
-        }
-
-        .nav-btn.prev:hover {
-            background: rgba(118, 75, 162, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .nav-btn.next {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            flex: 2;
-        }
-
-        .nav-btn.next:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(118, 75, 162, 0.4);
-        }
-
-        .nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .nav-btn.finish-btn {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            font-size: 20px;
-            animation: heartbeat 1.5s infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            25% {
-                transform: scale(1.05);
-            }
-            50% {
-                transform: scale(1);
-            }
-            75% {
-                transform: scale(1.05);
-            }
-        }
-
-        /* Final Animation Screen */
-        .final-animation-box {
-            text-align: center;
-            min-height: 70vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .heart-explosion {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .exploding-heart {
-            position: absolute;
-            font-size: 30px;
-            animation: explode 2s ease-out forwards;
-            opacity: 0;
-        }
-
-        @keyframes explode {
-            0% {
-                transform: translate(0, 0) scale(0) rotate(0deg);
-                opacity: 1;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .final-animation-content {
-            position: relative;
-            z-index: 10;
-            animation: fadeInScale 1.5s ease;
-        }
-
-        @keyframes fadeInScale {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .big-heart {
-            font-size: 120px;
-            animation: bigHeartPulse 2s infinite;
-            margin-bottom: 30px;
-            display: inline-block;
-        }
-
-        @keyframes bigHeartPulse {
-            0%, 100% {
-                transform: scale(1);
-                filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
-            }
-            50% {
-                transform: scale(1.2);
-                filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.8));
-            }
-        }
-
-        .final-title {
-            font-size: 56px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .final-subtitle {
-            font-size: 24px;
-            color: #764ba2;
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-
-        .decorative-line {
-            width: 200px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #f5576c, transparent);
-            margin: 30px auto;
-        }
-
-        .final-quote {
-            font-size: 18px;
-            color: #666;
-            line-height: 1.8;
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 30px;
-            background: rgba(245, 87, 108, 0.1);
-            border-radius: 15px;
-            border: 2px solid rgba(245, 87, 108, 0.3);
-        }
-
-        @media (max-width: 768px) {
-            .big-heart {
-                font-size: 80px;
-            }
-
-            .final-title {
-                font-size: 36px;
-            }
-
-            .final-subtitle {
-                font-size: 20px;
-            }
-
-            .final-quote {
-                font-size: 16px;
-                padding: 20px;
-            }
-        }
-
-        /* Progress Indicator */
-        .progress-indicator {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .progress-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(118, 75, 162, 0.3);
-            transition: all 0.3s;
-        }
-
-        .progress-dot.active {
-            background: #764ba2;
-            transform: scale(1.3);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .content-box {
-                padding: 40px 25px;
-            }
-
-            .login-box {
-                padding: 40px 25px;
-            }
-            
-            .welcome-section h1 {
-                font-size: 36px;
-            }
-
-            .special-date {
-                font-size: 18px;
-                padding: 15px 25px;
-            }
-
-            .welcome-message {
-                font-size: 18px;
-            }
-            
-            .greeting-box {
-                font-size: 18px;
-                padding: 30px 20px;
-            }
-
-            .timeline-header {
-                font-size: 28px;
-            }
-            
-            .timeline-item {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .timeline-icon {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-
-            .timeline-content h3 {
-                font-size: 20px;
-            }
-
-            .timeline-content p {
-                font-size: 16px;
-            }
-
-            .final-message {
-                padding: 30px 20px;
-            }
-
-            .final-message h2 {
-                font-size: 32px;
-            }
-
-            .final-message p {
-                font-size: 18px;
-            }
-
-            .promise-list {
-                font-size: 17px;
-            }
-
-            .nav-buttons {
-                flex-direction: column;
-            }
-
-            .nav-btn {
-                width: 100%;
-            }
-
-            .loader-text {
-                font-size: 32px;
-            }
-
-            .bg-circle {
-                display: none;
-            }
-
-            .logout-btn {
-                top: 15px;
-                right: 15px;
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .step-container {
-                padding: 20px 10px;
-            }
-
-            .welcome-section h1 {
-                font-size: 28px;
-            }
-
-            .login-box h1 {
-                font-size: 28px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <title>Valentine Proposal</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --black: #000000;
+      --rose: #b76e79;
+      --champagne: #f4e4c1;
+      --white: #fafafa;
+      --glass: rgba(20, 20, 20, 0.6);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glow: rgba(183, 110, 121, 0.45);
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: radial-gradient(circle at top, rgba(183, 110, 121, 0.15), transparent 55%),
+        radial-gradient(circle at 10% 20%, rgba(244, 228, 193, 0.12), transparent 50%),
+        #030303;
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    #root {
+      position: relative;
+      z-index: 1;
+    }
+
+    canvas.particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .gradient-text {
+      background: linear-gradient(120deg, var(--champagne), var(--rose));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 6s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
+      padding: 72px 6vw 120px;
+      position: relative;
+    }
+
+    header.hero {
+      min-height: 90vh;
+      display: grid;
+      gap: 48px;
+      align-items: center;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    h1, h2, h3 {
+      font-family: "Playfair Display", serif;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 5vw, 4.8rem);
+      line-height: 1.05;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 3.2vw, 3.2rem);
+    }
+
+    .eyebrow {
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      color: var(--champagne);
+      font-weight: 600;
+    }
+
+    .glass {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: 0 30px 70px var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-card {
+      padding: 32px;
+      display: grid;
+      gap: 20px;
+    }
+
+    .heart {
+      width: 90px;
+      height: 90px;
+      display: grid;
+      place-items: center;
+      border-radius: 30px;
+      background: radial-gradient(circle at top, rgba(244, 228, 193, 0.2), transparent 60%),
+        rgba(183, 110, 121, 0.15);
+      border: 1px solid rgba(183, 110, 121, 0.35);
+      box-shadow: 0 0 30px rgba(183, 110, 121, 0.4);
+      font-size: 2.3rem;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .scroll-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: rgba(250, 250, 250, 0.7);
+      margin-top: 18px;
+    }
+
+    .scroll-indicator span {
+      width: 32px;
+      height: 52px;
+      border-radius: 999px;
+      border: 1px solid rgba(250, 250, 250, 0.3);
+      position: relative;
+      display: inline-block;
+    }
+
+    .scroll-indicator span::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      background: var(--champagne);
+      border-radius: 50%;
+      animation: scroll 1.6s ease-in-out infinite;
+    }
+
+    @keyframes scroll {
+      0% { opacity: 0; transform: translate(-50%, 0); }
+      50% { opacity: 1; }
+      100% { opacity: 0; transform: translate(-50%, 18px); }
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #8f515a, var(--rose));
+      color: var(--white);
+      box-shadow: 0 16px 30px rgba(183, 110, 121, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 22px 40px rgba(183, 110, 121, 0.55);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(244, 228, 193, 0.3);
+      color: var(--champagne);
+    }
+
+    .section {
+      display: grid;
+      gap: 36px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 28px;
+      position: relative;
+    }
+
+    .parallax-orb {
+      position: absolute;
+      right: 10%;
+      top: -40px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(244, 228, 193, 0.18), transparent 70%);
+      filter: blur(2px);
+      z-index: 0;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(183, 110, 121, 0.6), rgba(244, 228, 193, 0.2));
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 20px;
+      align-items: start;
+      position: relative;
+    }
+
+    .timeline-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--rose);
+      box-shadow: 0 0 0 8px rgba(183, 110, 121, 0.2);
+      margin-top: 6px;
+      margin-left: 11px;
+    }
+
+    .timeline-card {
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(8, 8, 8, 0.7);
+      border: 1px solid rgba(244, 228, 193, 0.12);
+      display: grid;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .image-placeholder {
+      height: 150px;
+      border-radius: 16px;
+      background: linear-gradient(140deg, rgba(244, 228, 193, 0.2), rgba(183, 110, 121, 0.2));
+      border: 1px dashed rgba(244, 228, 193, 0.4);
+      display: grid;
+      place-items: center;
+      color: rgba(250, 250, 250, 0.7);
+      font-size: 0.95rem;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .quiz-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .quiz-card {
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(10, 10, 10, 0.75);
+      border: 1px solid rgba(244, 228, 193, 0.1);
+      display: grid;
+      gap: 14px;
+      position: relative;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.02);
+      cursor: pointer;
+      transition: border 0.2s ease, transform 0.2s ease;
+    }
+
+    .option.selected {
+      border-color: rgba(244, 228, 193, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(183, 110, 121, 0.2);
+    }
+
+    .option.correct {
+      border-color: rgba(244, 228, 193, 0.7);
+      background: rgba(244, 228, 193, 0.12);
+    }
+
+    .option.flip {
+      transform: rotateY(12deg);
+    }
+
+    .option.media {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .media-thumb {
+      width: 100%;
+      height: 100px;
+      border-radius: 12px;
+      background: linear-gradient(140deg, rgba(244, 228, 193, 0.2), rgba(183, 110, 121, 0.2));
+      border: 1px solid rgba(244, 228, 193, 0.2);
+      display: grid;
+      place-items: center;
+      font-size: 0.9rem;
+      transition: transform 0.3s ease;
+    }
+
+    .media-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .option.media:hover .media-thumb {
+      transform: scale(1.05);
+    }
+
+    .emoji-bounce {
+      display: inline-block;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .coffee-spin {
+      display: inline-block;
+      animation: steam 2.6s ease-in-out infinite;
+    }
+
+    @keyframes steam {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-6deg); }
+    }
+
+    .progress-bar {
+      height: 6px;
+      width: 100%;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--rose), var(--champagne));
+      width: 0;
+    }
+
+    .question-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: rgba(250, 250, 250, 0.7);
+    }
+
+    .big-question {
+      min-height: 70vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      gap: 28px;
+    }
+
+    .big-question .buttons {
+      position: relative;
+      height: 120px;
+      width: min(520px, 90vw);
+      margin: 0 auto;
+    }
+
+    .no-btn {
+      position: absolute;
+      right: 0;
+      top: 40px;
+      background: rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+    }
+
+    .yes-btn {
+      position: absolute;
+      left: 0;
+      top: 20px;
+      padding: 16px 42px;
+      font-size: 1.05rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #7b404a, var(--rose), var(--champagne));
+      color: var(--black);
+      box-shadow: 0 20px 40px rgba(183, 110, 121, 0.5);
+    }
+
+    .reveal {
+      display: grid;
+      gap: 28px;
+    }
+
+    .gallery {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+
+    .gallery-item {
+      height: 180px;
+      border-radius: 18px;
+      background: linear-gradient(130deg, rgba(244, 228, 193, 0.2), rgba(183, 110, 121, 0.2));
+      border: 1px solid rgba(244, 228, 193, 0.2);
+      display: grid;
+      place-items: center;
+      font-size: 0.95rem;
+    }
+
+    .carousel {
+      display: grid;
+      gap: 16px;
+    }
+
+    .carousel-frame {
+      position: relative;
+      height: 240px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(244, 228, 193, 0.2);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .carousel-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carousel-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(244, 228, 193, 0.08);
+      border: 1px solid rgba(244, 228, 193, 0.25);
+      font-size: 0.85rem;
+    }
+
+    .toolbar {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .toolbar button {
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.8rem;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+    }
+
+    .hidden-gallery {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: grid;
+      place-items: center;
+      z-index: 20;
+    }
+
+    .hidden-gallery .panel {
+      max-width: 720px;
+      width: 90vw;
+      padding: 28px;
+      border-radius: 24px;
+      background: rgba(10, 10, 10, 0.9);
+      border: 1px solid rgba(244, 228, 193, 0.2);
+      display: grid;
+      gap: 18px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: rgba(10, 10, 10, 0.8);
+      border: 1px solid rgba(244, 228, 193, 0.2);
+      padding: 12px 18px;
+      border-radius: 12px;
+      z-index: 12;
+      font-size: 0.9rem;
+    }
+
+    .progress-indicator {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 4px;
+      width: 100%;
+      z-index: 15;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .progress-indicator span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--rose), var(--champagne));
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        padding: 48px 6vw 96px;
+        gap: 96px;
+      }
+
+      .big-question .buttons {
+        height: 150px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="animated-bg">
-        <div class="bg-circle"></div>
-        <div class="bg-circle"></div>
-        <div class="bg-circle"></div>
-        <div class="bg-circle"></div>
-    </div>
+  <canvas class="particles" id="particles"></canvas>
+  <div id="root"></div>
+  <script type="module">
+    import React, { useEffect, useMemo, useRef, useState } from "https://esm.sh/react@18.2.0";
+    import { createRoot } from "https://esm.sh/react-dom@18.2.0/client";
+    import { HashRouter, Routes, Route, useNavigate } from "https://esm.sh/react-router-dom@6.22.3";
+    import { motion, AnimatePresence } from "https://esm.sh/framer-motion@10.18.0";
+    import { Link, Element, scroller } from "https://esm.sh/react-scroll@1.9.0";
+    import confetti from "https://esm.sh/canvas-confetti@1.9.3";
+    import { jsPDF } from "https://esm.sh/jspdf@2.5.1";
 
-    <!-- Floating hearts background -->
-    <div class="hearts" id="hearts"></div>
+    const STORAGE_KEY = "valentine-quiz";
 
-    <!-- Logout Button -->
-    <button class="logout-btn" id="logoutBtn" onclick="logout()">Logout 🚪</button>
+    const quizQuestions = [
+      {
+        id: 1,
+        text: "What's your favorite color?",
+        options: ["Red", "Pink", "Black", "White"],
+        correct: ["Black"],
+        success: "You know me so well! 🖤",
+      },
+      {
+        id: 2,
+        text: "Our favorite series to binge together?",
+        options: ["Friends", "Breaking Bad", "Stranger Things", "The Office"],
+        correct: ["Stranger Things"],
+        flip: true,
+      },
+      {
+        id: 3,
+        text: "Which places have you explored?",
+        options: ["Kodaikanal", "Kerala", "Ooty", "Goa"],
+        correct: ["Kodaikanal", "Kerala"],
+        multi: true,
+        icons: ["🏔️", "🌴", "🌧️", "🌊"],
+      },
+      {
+        id: 4,
+        text: "Your seafood preference?",
+        options: ["🐟 Fish", "🦐 Prawns", "🦀 Crab", "🦑 Squid"],
+        correct: ["🦐 Prawns"],
+      },
+      {
+        id: 5,
+        text: "Your dream car?",
+        options: ["Brezza", "Grand Vitara", "Hyryder"],
+        correct: ["Grand Vitara"],
+        images: true,
+      },
+      {
+        id: 6,
+        text: "My favorite snack when we watch movies?",
+        options: ["Popcorn", "Chips", "Nachos", "Chocolate"],
+        correct: { base: "Popcorn", followUp: "Butter" },
+        followUp: {
+          question: "What flavor?",
+          options: ["Caramel", "Butter", "Cheese"],
+        },
+      },
+      {
+        id: 7,
+        text: "Your go-to beverage?",
+        options: ["Coffee", "Tea", "Juice", "Smoothie"],
+        correct: ["Coffee"],
+        icon: "☕",
+      },
+      {
+        id: 8,
+        text: "Your perfect dress size for that special outfit I'm planning?",
+        options: ["XS", "S", "M", "L"],
+        correct: ["S"],
+        icon: "👗",
+      },
+      {
+        id: 9,
+        text: "Your favorite cuisine?",
+        options: ["Italian", "Korean", "Indian", "Chinese"],
+        correct: ["Korean"],
+        icon: "🍜",
+      },
+    ];
 
-    <!-- Loader -->
-    <div class="loader-container" id="loader">
-        <div class="loader-content">
-            <div class="loader-text">GHAZAL</div>
-            <div class="loader-spinner"></div>
-            <div class="loader-message">Preparing something special...</div>
-        </div>
-    </div>
+    const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect width='600' height='400' fill='%23080808'/%3E%3Cpath d='M0 300 C120 260 240 360 360 320 C480 280 540 360 600 320 L600 400 L0 400 Z' fill='%23b76e79' opacity='0.4'/%3E%3Ccircle cx='480' cy='120' r='80' fill='%23f4e4c1' opacity='0.35'/%3E%3C/svg%3E";
+    const carImages = {
+      Brezza: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='300'%3E%3Crect width='520' height='300' fill='%23060606'/%3E%3Cpath d='M80 190 L140 120 H320 L380 190 Z' fill='%23b76e79'/%3E%3Crect x='120' y='150' width='70' height='40' fill='%23f4e4c1' opacity='0.4'/%3E%3Crect x='230' y='150' width='70' height='40' fill='%23f4e4c1' opacity='0.4'/%3E%3Ccircle cx='160' cy='205' r='22' fill='%23000000' stroke='%23f4e4c1' stroke-width='4'/%3E%3Ccircle cx='320' cy='205' r='22' fill='%23000000' stroke='%23f4e4c1' stroke-width='4'/%3E%3C/svg%3E",
+      "Grand Vitara": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='300'%3E%3Crect width='520' height='300' fill='%23060606'/%3E%3Cpath d='M60 190 L140 110 H360 L440 190 Z' fill='%23f4e4c1'/%3E%3Crect x='130' y='145' width='80' height='45' fill='%23b76e79' opacity='0.45'/%3E%3Crect x='250' y='145' width='80' height='45' fill='%23b76e79' opacity='0.45'/%3E%3Ccircle cx='170' cy='210' r='24' fill='%23000000' stroke='%23b76e79' stroke-width='4'/%3E%3Ccircle cx='340' cy='210' r='24' fill='%23000000' stroke='%23b76e79' stroke-width='4'/%3E%3C/svg%3E",
+      Hyryder: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='300'%3E%3Crect width='520' height='300' fill='%23060606'/%3E%3Cpath d='M70 190 L150 120 H350 L430 190 Z' fill='%23b76e79'/%3E%3Crect x='140' y='148' width='70' height='40' fill='%23f4e4c1' opacity='0.4'/%3E%3Crect x='250' y='148' width='70' height='40' fill='%23f4e4c1' opacity='0.4'/%3E%3Ccircle cx='170' cy='210' r='22' fill='%23000000' stroke='%23f4e4c1' stroke-width='4'/%3E%3Ccircle cx='330' cy='210' r='22' fill='%23000000' stroke='%23f4e4c1' stroke-width='4'/%3E%3C/svg%3E"
+    };
 
-    <!-- Step 1: Login -->
-    <div class="step-container active" id="step1" style="opacity: 1;">
-        <div class="login-box">
-            <h1>✨ Something Special ✨</h1>
-            <p class="subtitle">For someone who makes every moment beautiful</p>
-            
-            <form id="loginForm">
-                <div class="input-group">
-                    <label>Enter Your Name</label>
-                    <input type="text" id="username" placeholder="Your beautiful name..." autocomplete="off">
-                </div>
-                
-                <div class="input-group">
-                    <label>Special Code</label>
-                    <input type="password" id="password" placeholder="Our special code...">
-                </div>
-                
-                <button type="submit" class="login-btn">Enter 💖</button>
-                <p class="error-message" id="errorMsg">Please check your name and code ❤️</p>
-            </form>
-        </div>
-    </div>
+    const gallerySlides = [
+      { label: "Golden hour", src: placeholderImage },
+      { label: "Coffee dates", src: placeholderImage },
+      { label: "Movie night", src: placeholderImage },
+      { label: "Road trip", src: placeholderImage },
+    ];
 
-    <!-- Step 2: Welcome -->
-    <div class="step-container" id="step2">
-        <div class="content-box">
-            <div class="progress-indicator">
-                <div class="progress-dot"></div>
-                <div class="progress-dot active"></div>
-                <div class="progress-dot"></div>
-                <div class="progress-dot"></div>
-            </div>
+    const ripple = (event) => {
+      const button = event.currentTarget;
+      const circle = document.createElement("span");
+      const diameter = Math.max(button.clientWidth, button.clientHeight);
+      const radius = diameter / 2;
+      circle.style.width = `${diameter}px`;
+      circle.style.height = `${diameter}px`;
+      circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+      circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+      circle.style.position = "absolute";
+      circle.style.borderRadius = "50%";
+      circle.style.background = "rgba(255, 255, 255, 0.35)";
+      circle.style.transform = "scale(0)";
+      circle.style.opacity = "0.8";
+      circle.style.pointerEvents = "none";
+      circle.style.animation = "ripple 0.6s ease";
+      button.appendChild(circle);
+      circle.addEventListener("animationend", () => circle.remove());
+    };
 
-            <div class="welcome-section">
-                <h1>For Ghazal Hafizha 💕</h1>
-                <div class="special-date">
-                    ✨ Born on 23rd March 2003 ✨
-                </div>
-                <p class="welcome-message">
-                    A day that brought someone extraordinary into this world
-                </p>
-            </div>
+    const useKonami = (onMatch) => {
+      useEffect(() => {
+        const seq = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+        let index = 0;
+        const handler = (event) => {
+          if (event.key.toLowerCase() === seq[index].toLowerCase()) {
+            index += 1;
+            if (index === seq.length) {
+              index = 0;
+              onMatch();
+            }
+          } else {
+            index = 0;
+          }
+        };
+        window.addEventListener("keydown", handler);
+        return () => window.removeEventListener("keydown", handler);
+      }, [onMatch]);
+    };
 
-            <div class="nav-buttons">
-                <button class="nav-btn next" onclick="nextStep(2)">Continue 💝</button>
-            </div>
-        </div>
-    </div>
+    const Particles = () => {
+      useEffect(() => {
+        const canvas = document.getElementById("particles");
+        const ctx = canvas.getContext("2d");
+        let width = (canvas.width = window.innerWidth);
+        let height = (canvas.height = window.innerHeight);
+        const hearts = Array.from({ length: 40 }).map(() => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          speed: 0.2 + Math.random() * 0.6,
+          size: 8 + Math.random() * 12,
+          alpha: 0.15 + Math.random() * 0.3,
+        }));
 
-    <!-- Step 3: Greeting -->
-    <div class="step-container" id="step3">
-        <div class="content-box">
-            <div class="progress-indicator">
-                <div class="progress-dot"></div>
-                <div class="progress-dot"></div>
-                <div class="progress-dot active"></div>
-                <div class="progress-dot"></div>
-            </div>
+        const render = () => {
+          ctx.clearRect(0, 0, width, height);
+          hearts.forEach((h) => {
+            h.y -= h.speed;
+            if (h.y < -20) {
+              h.y = height + 20;
+              h.x = Math.random() * width;
+            }
+            ctx.fillStyle = `rgba(183, 110, 121, ${h.alpha})`;
+            ctx.beginPath();
+            ctx.arc(h.x, h.y, h.size / 2.2, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          requestAnimationFrame(render);
+        };
 
-            <div class="greeting-box">
-                <p>
-                    <strong style="font-size: 26px;">As-Salamu Alaikum! 🌙</strong><br><br>
-                    On this special day of our function, I wanted to create something 
-                    that shows how much this moment means to me. You're not just someone I'm meeting today,
-                    but someone I hope to cherish for a lifetime, In sha Allah.
-                </p>
-            </div>
+        const onResize = () => {
+          width = (canvas.width = window.innerWidth);
+          height = (canvas.height = window.innerHeight);
+        };
 
-            <div class="nav-buttons">
-                <button class="nav-btn prev" onclick="prevStep(3)">← Back</button>
-                <button class="nav-btn next" onclick="nextStep(3)">Continue 💝</button>
-            </div>
-        </div>
-    </div>
+        window.addEventListener("resize", onResize);
+        render();
+        return () => window.removeEventListener("resize", onResize);
+      }, []);
+      return null;
+    };
 
-    <!-- Step 4: Timeline -->
-    <div class="step-container" id="step4">
-        <div class="content-box">
-            <div class="progress-indicator">
-                <div class="progress-dot"></div>
-                <div class="progress-dot"></div>
-                <div class="progress-dot"></div>
-                <div class="progress-dot active"></div>
-            </div>
+    const QuizCard = ({ question, index, total, answers, setAnswers }) => {
+      const selection = answers[question.id] || (question.followUp ? { base: null, followUp: null } : []);
 
-            <h2 class="timeline-header">Why You're Special 🌟</h2>
-
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-icon">🌸</div>
-                    <div class="timeline-content">
-                        <h3>Your Beautiful Soul</h3>
-                        <p>From the moment I heard about you, I knew there was something special. Your name itself, "Ghazal Hafizha", carries such elegance and grace.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon">💫</div>
-                    <div class="timeline-content">
-                        <h3>Our New Beginning</h3>
-                        <p>Today marks the beginning of a beautiful journey. I promise to respect, cherish, and support you in every step we take together.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon">🤲</div>
-                    <div class="timeline-content">
-                        <h3>With Faith & Respect</h3>
-                        <p>I believe that marriage is a sacred bond, and I'm committed to building a relationship based on faith, trust, and mutual respect.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-icon">🌙</div>
-                    <div class="timeline-content">
-                        <h3>Our Future Together</h3>
-                        <p>I look forward to creating beautiful memories, supporting each other's dreams, and building a home filled with love, laughter, and blessings.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="nav-btn prev" onclick="prevStep(4)">← Back</button>
-                <button class="nav-btn next" onclick="nextStep(4)">Continue 💝</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Step 5: Final Message -->
-    <div class="step-container" id="step5">
-        <div class="content-box">
-            <div class="progress-indicator">
-                <div class="progress-dot active"></div>
-                <div class="progress-dot active"></div>
-                <div class="progress-dot active"></div>
-                <div class="progress-dot active"></div>
-            </div>
-
-            <div class="final-message">
-                <h2>My Promise to You 💝</h2>
-                <p style="margin-bottom: 30px;">
-                    I may not have all the perfect words right now, but I promise to be someone who:
-                </p>
-                
-                <div class="promise-list">
-                    <div>✨ Always respects and values you</div>
-                    <div>✨ Supports your dreams and aspirations</div>
-                    <div>✨ Stands by you through every moment</div>
-                    <div>✨ Keeps Allah at the center of our relationship</div>
-                    <div>✨ Makes you smile every single day</div>
-                </div>
-
-                <p style="margin-top: 30px;">
-                    <strong style="font-size: 32px; color: #764ba2;">
-                        Here's to our beautiful beginning! 🌹
-                    </strong>
-                </p>
-            </div>
-
-            <div class="nav-buttons">
-                <button class="nav-btn prev" onclick="prevStep(5)">← Back</button>
-                <button class="nav-btn next finish-btn" onclick="finishJourney()">With All My Love 💖</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Final Animation Screen -->
-    <div class="step-container" id="stepFinal">
-        <div class="content-box final-animation-box">
-            <div class="heart-explosion" id="heartExplosion"></div>
-            <div class="final-animation-content">
-                <div class="big-heart">❤️</div>
-                <h1 class="final-title">Forever & Always</h1>
-                <p class="final-subtitle">May Allah bless our journey together</p>
-                <div class="decorative-line"></div>
-                <p class="final-quote">
-                    "And of His signs is that He created for you from yourselves mates<br>
-                    that you may find tranquility in them; and He placed between you<br>
-                    affection and mercy." - Quran 30:21
-                </p>
-                <button class="nav-btn next" onclick="restartJourney()" style="margin-top: 40px;">Start Again ↻</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let currentStep = 1;
-
-        // Hide loader after page loads
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-            }, 2000);
-        });
-
-        // Create floating hearts
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            const hearts = ['💕', '💖', '💗', '💝', '❤️', '🌹'];
-            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
-            heart.style.animationDelay = Math.random() * 2 + 's';
-            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
-            document.getElementById('hearts').appendChild(heart);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 8000);
-        }
-
-        // Generate hearts continuously
-        setInterval(createHeart, 800);
-        for(let i = 0; i < 15; i++) {
-            setTimeout(createHeart, i * 300);
-        }
-
-        // Login functionality
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value.trim().toLowerCase();
-            const password = document.getElementById('password').value.trim();
-            const errorMsg = document.getElementById('errorMsg');
-            
-            if (username === 'ghazal hafizha' && password === '143hafizha') {
-                // Hide login page immediately for smooth transition
-                document.getElementById('step1').style.opacity = '0';
-                
-                setTimeout(() => {
-                    showLoader('GHAZAL', 'Welcome to something beautiful...', () => {
-                        goToStep(2);
-                        // Show logout button
-                        document.getElementById('logoutBtn').classList.add('show');
-                    });
-                    createMultipleHearts();
-                }, 300);
+      const toggleOption = (option) => {
+        setAnswers((prev) => {
+          const current = prev[question.id] || (question.followUp ? { base: null, followUp: null } : []);
+          let next;
+          if (question.followUp) {
+            if (question.followUp.options.includes(option)) {
+              next = { ...current, followUp: option };
             } else {
-                errorMsg.style.display = 'block';
-                const loginBox = document.querySelector('.login-box');
-                loginBox.style.animation = 'shake 0.5s';
-                setTimeout(() => {
-                    loginBox.style.animation = '';
-                }, 500);
+              next = { base: option, followUp: current.followUp };
             }
+          } else if (question.multi) {
+            next = current.includes(option) ? current.filter((item) => item !== option) : [...current, option];
+          } else {
+            next = [option];
+          }
+          return { ...prev, [question.id]: next };
         });
+      };
 
-        // Navigation functions
-        function nextStep(current) {
-            const loaderMessages = {
-                2: 'Loading your special message...',
-                3: 'Preparing your story...',
-                4: 'Almost there...'
-            };
+      const isCorrect = question.followUp
+        ? selection.base === question.correct.base && selection.followUp === question.correct.followUp
+        : selection.length > 0 && selection.every((item) => question.correct.includes(item)) && question.correct.length === selection.length;
 
-            // Hide current step immediately
-            document.getElementById('step' + current).style.opacity = '0';
-            
-            setTimeout(() => {
-                showLoader('GHAZAL', loaderMessages[current] || 'Loading...', () => {
-                    goToStep(current + 1);
-                });
-            }, 300);
-        }
+      return (
+        <motion.div
+          className="quiz-card"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="question-meta">
+            <span>Question {index + 1} of {total}</span>
+            <span>
+              {question.icon ? (
+                <span className={question.icon === "☕" ? "coffee-spin" : "emoji-bounce"}>{question.icon}</span>
+              ) : (
+                ""
+              )}
+            </span>
+          </div>
+          <h3>{question.text}</h3>
+          <div className="options">
+            {question.options.map((option, optionIndex) => {
+              const selected = question.followUp ? selection.base === option : selection.includes(option);
+              const classes = [
+                "option",
+                question.images ? "media" : "",
+                selected ? "selected" : "",
+                question.flip && selected ? "flip" : "",
+                isCorrect && selected ? "correct" : "",
+              ].join(" ");
+              return (
+                <button
+                  type="button"
+                  key={option}
+                  className={classes}
+                  onClick={(event) => {
+                    ripple(event);
+                    toggleOption(option);
+                  }}
+                >
+                  {question.images ? (
+                    <>
+                      <div className="media-thumb">
+                        <img src={carImages[option] || placeholderImage} alt={`${option} car`} loading="lazy" />
+                      </div>
+                      <span>{option}</span>
+                    </>
+                  ) : (
+                    <span>
+                      {question.icons ? `${question.icons[optionIndex]} ${option}` : option}
+                    </span>
+                  )}
+                  {selected ? <span>✓</span> : <span></span>}
+                </button>
+              );
+            })}
+          </div>
+          {question.success && isCorrect ? <p className="pill">{question.success}</p> : null}
+          {question.followUp && selection.base === "Popcorn" ? (
+            <div className="options" style={{ marginTop: "10px" }}>
+              <p style={{ fontSize: "0.9rem", color: "rgba(250,250,250,0.75)" }}>{question.followUp.question}</p>
+              {question.followUp.options.map((option) => {
+                const selected = selection.followUp === option;
+                return (
+                  <button
+                    type="button"
+                    key={option}
+                    className={`option ${selected ? "selected" : ""}`}
+                    onClick={(event) => {
+                      ripple(event);
+                      toggleOption(option);
+                    }}
+                  >
+                    {option}
+                  </button>
+                );
+              })}
+            </div>
+          ) : null}
+        </motion.div>
+      );
+    };
 
-        function prevStep(current) {
-            // Hide current step immediately
-            document.getElementById('step' + current).style.opacity = '0';
-            
-            setTimeout(() => {
-                showLoader('GHAZAL', 'Going back...', () => {
-                    goToStep(current - 1);
-                });
-            }, 300);
-        }
+    const Home = () => {
+      const [answers, setAnswers] = useState(() => {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        return stored ? JSON.parse(stored) : {};
+      });
+      const [showReveal, setShowReveal] = useState(false);
+      const [noAttempts, setNoAttempts] = useState(0);
+      const [noHidden, setNoHidden] = useState(false);
+      const [noPos, setNoPos] = useState({ x: 0, y: 40, scale: 1 });
+      const [toast, setToast] = useState("");
+      const [secretOpen, setSecretOpen] = useState(false);
+      const [musicOn, setMusicOn] = useState(false);
+      const [progress, setProgress] = useState(0);
+      const questionText = "Will You Be My Valentine? 💍";
+      const [typedText, setTypedText] = useState("");
+      const [galleryIndex, setGalleryIndex] = useState(0);
+      const navigate = useNavigate();
+      const audioRef = useRef(null);
+      const parallaxRef = useRef(null);
 
-        function showLoader(text, message, callback) {
-            const loader = document.getElementById('loader');
-            loader.querySelector('.loader-text').textContent = text;
-            loader.querySelector('.loader-message').textContent = message;
-            loader.classList.remove('hidden');
+      useEffect(() => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
+      }, [answers]);
 
-            setTimeout(() => {
-                loader.classList.add('hidden');
-                if (callback) {
-                    setTimeout(callback, 500);
-                }
-            }, 1500);
-        }
+      useEffect(() => {
+        const onScroll = () => {
+          const height = document.body.scrollHeight - window.innerHeight;
+          const scrolled = height > 0 ? (window.scrollY / height) * 100 : 0;
+          setProgress(scrolled);
+          if (parallaxRef.current) {
+            const offset = window.scrollY * 0.08;
+            parallaxRef.current.style.transform = `translateY(${offset}px)`;
+          }
+        };
+        window.addEventListener("scroll", onScroll);
+        onScroll();
+        return () => window.removeEventListener("scroll", onScroll);
+      }, []);
 
-        // Create multiple hearts on special moments
-        function createMultipleHearts() {
-            for(let i = 0; i < 40; i++) {
-                setTimeout(createHeart, i * 80);
-            }
-        }
+      useEffect(() => {
+        let index = 0;
+        setTypedText("");
+        const timer = setInterval(() => {
+          index += 1;
+          setTypedText(questionText.slice(0, index));
+          if (index >= questionText.length) {
+            clearInterval(timer);
+          }
+        }, 80);
+        return () => clearInterval(timer);
+      }, [questionText]);
 
-        // Finish Journey with beautiful animation
-        function finishJourney() {
-            // Hide current step immediately
-            document.getElementById('step5').style.opacity = '0';
-            
-            setTimeout(() => {
-                showLoader('GHAZAL', 'Forever in my heart...', () => {
-                    goToStep('Final');
-                    createHeartExplosion();
-                    setTimeout(() => {
-                        createMultipleHearts();
-                    }, 1000);
-                });
-            }, 300);
-        }
+      useKonami(() => {
+        setSecretOpen(true);
+        setToast("Secret unlocked: Hidden gallery revealed ✨");
+        navigate("/gallery");
+      });
 
-        // Create heart explosion effect
-        function createHeartExplosion() {
-            const container = document.getElementById('heartExplosion');
-            const hearts = ['❤️', '💕', '💖', '💗', '💝', '💓', '💞', '💟', '🌹'];
-            const numHearts = 30;
+      const totalQuestions = quizQuestions.length;
+      const score = useMemo(() => {
+        return quizQuestions.reduce((acc, q) => {
+          const selection = answers[q.id] || (q.followUp ? { base: null, followUp: null } : []);
+          const correct = q.followUp
+            ? selection.base === q.correct.base && selection.followUp === q.correct.followUp
+            : selection.length > 0 && selection.every((item) => q.correct.includes(item)) && q.correct.length === selection.length;
+          return acc + (correct ? 1 : 0);
+        }, 0);
+      }, [answers]);
 
-            for (let i = 0; i < numHearts; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.className = 'exploding-heart';
-                    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
-                    
-                    const angle = (360 / numHearts) * i;
-                    const distance = 200 + Math.random() * 200;
-                    const tx = Math.cos(angle * Math.PI / 180) * distance;
-                    const ty = Math.sin(angle * Math.PI / 180) * distance;
-                    
-                    heart.style.setProperty('--tx', tx + 'px');
-                    heart.style.setProperty('--ty', ty + 'px');
-                    heart.style.left = '50%';
-                    heart.style.top = '50%';
-                    
-                    container.appendChild(heart);
-                    
-                    setTimeout(() => {
-                        heart.remove();
-                    }, 2000);
-                }, i * 50);
-            }
-        }
-
-        // Restart journey
-        function restartJourney() {
-            // Hide current step immediately
-            document.getElementById('stepFinal').style.opacity = '0';
-            
-            setTimeout(() => {
-                showLoader('GHAZAL', 'Taking you back...', () => {
-                    goToStep(2);
-                });
-            }, 300);
-        }
-
-        // Modified goToStep to handle 'Final' step
-        function goToStep(step) {
-            document.querySelectorAll('.step-container').forEach(container => {
-                container.classList.remove('active');
-                container.style.opacity = '0';
-            });
-            
-            setTimeout(() => {
-                if (step === 'Final') {
-                    const finalStep = document.getElementById('stepFinal');
-                    finalStep.classList.add('active');
-                    finalStep.style.opacity = '1';
-                } else {
-                    const currentStepEl = document.getElementById('step' + step);
-                    currentStepEl.classList.add('active');
-                    currentStepEl.style.opacity = '1';
-                    currentStep = step;
-                }
-                
-                window.scrollTo(0, 0);
-            }, 50);
-        }
-
-        // Logout function with beautiful message
-        function logout() {
-            const logoutMessages = [
-                'Until we meet again, Ghazal...',
-                'You will always be in my thoughts...',
-                'May Allah keep you safe...',
-                'Looking forward to our next moment together...'
-            ];
-            
-            const randomMessage = logoutMessages[Math.floor(Math.random() * logoutMessages.length)];
-            
-            // Hide current step immediately
-            const activeStep = document.querySelector('.step-container.active');
-            if (activeStep) {
-                activeStep.style.opacity = '0';
-            }
-            
-            setTimeout(() => {
-                showLoader('GOODBYE', randomMessage, () => {
-                    // Hide logout button
-                    document.getElementById('logoutBtn').classList.remove('show');
-                    
-                    // Clear inputs
-                    document.getElementById('username').value = '';
-                    document.getElementById('password').value = '';
-                    document.getElementById('errorMsg').style.display = 'none';
-                    
-                    // Go back to login
-                    document.querySelectorAll('.step-container').forEach(container => {
-                        container.classList.remove('active');
-                        container.style.opacity = '0';
-                    });
-                    
-                    const loginStep = document.getElementById('step1');
-                    loginStep.classList.add('active');
-                    loginStep.style.opacity = '1';
-                    currentStep = 1;
-                });
-            }, 300);
-            
-            // Create farewell hearts
-            for(let i = 0; i < 20; i++) {
-                setTimeout(createHeart, i * 100);
-            }
-        }
-
-        // Shake animation
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-10px); }
-                75% { transform: translateX(10px); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Add entrance animation to timeline items when they become visible
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.timeline-item').forEach(item => {
-            observer.observe(item);
+      const handleYes = () => {
+        confetti({
+          particleCount: 180,
+          spread: 90,
+          origin: { y: 0.6 },
+          colors: ["#b76e79", "#f4e4c1", "#ffffff"],
         });
-    </script>
+        setShowReveal(true);
+        setToast("She said YES! 💍");
+        scroller.scrollTo("reveal", { smooth: true, offset: -40, duration: 800 });
+        if (musicOn && audioRef.current) {
+          audioRef.current.play().catch(() => {});
+        }
+      };
+
+      const moveNo = () => {
+        if (noHidden) return;
+        const attempts = noAttempts + 1;
+        setNoAttempts(attempts);
+        if (attempts >= 5) {
+          setNoHidden(true);
+          setToast("Oops! Looks like NO isn't an option! 😄");
+          return;
+        }
+        const x = Math.random() * 260;
+        const y = 10 + Math.random() * 70;
+        const scale = Math.max(0.6, 1 - attempts * 0.1);
+        setNoPos({ x, y, scale });
+        if (attempts === 4) {
+          setToast("Error 404: 'NO' not found in our love story! ❤️");
+        }
+      };
+
+      const handleShare = async () => {
+        const shareData = {
+          title: "Our Valentine Story",
+          text: "A journey to forever. Will you be my Valentine?",
+          url: window.location.href,
+        };
+        if (navigator.share) {
+          await navigator.share(shareData);
+        } else {
+          await navigator.clipboard.writeText(window.location.href);
+          setToast("Link copied to clipboard! 💌");
+        }
+      };
+
+      const handleDownload = () => {
+        const doc = new jsPDF();
+        doc.setFont("times", "normal");
+        doc.text("Our Memories", 20, 20);
+        doc.setFontSize(12);
+        doc.text(
+          [
+            "From that first day on October 12,",
+            "To our special November 20,",
+            "Every coffee date, every Stranger Things episode,",
+            "Every adventure from Kodaikanal to Kerala,",
+            "Every moment with you has been perfect.",
+            "",
+            "You're my favorite person,",
+            "My Korean food buddy,",
+            "My Sirai movie partner,",
+            "My everything.",
+          ],
+          20,
+          40
+        );
+        doc.save("our-memories.pdf");
+      };
+
+      const nextSlide = () => {
+        setGalleryIndex((prev) => (prev + 1) % gallerySlides.length);
+      };
+
+      const prevSlide = () => {
+        setGalleryIndex((prev) => (prev - 1 + gallerySlides.length) % gallerySlides.length);
+      };
+
+      const toggleMusic = () => {
+        setMusicOn((prev) => !prev);
+        if (!musicOn && audioRef.current) {
+          audioRef.current.play().catch(() => {});
+        } else if (audioRef.current) {
+          audioRef.current.pause();
+        }
+      };
+
+      return (
+        <div className="page">
+          <div className="progress-indicator">
+            <span style={{ width: `${progress}%` }}></span>
+          </div>
+
+          <div className="toolbar">
+            <button onClick={toggleMusic}>{musicOn ? "Music: On" : "Music: Off"}</button>
+            <button onClick={() => scroller.scrollTo("quiz", { smooth: true, offset: -40 })}>Quiz</button>
+          </div>
+
+          <header className="hero" onDoubleClick={() => navigate("/gallery")}> 
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
+              <span className="eyebrow">Valentine's Day</span>
+              <h1 className="gradient-text">A Journey to Forever...</h1>
+              <p style={{ lineHeight: 1.7, fontSize: "1.05rem", maxWidth: "520px", marginTop: "16px" }}>
+                A premium black-and-rose-gold love story, crafted for the woman who made every day feel like a promise.
+              </p>
+              <div className="cta-row">
+                <Link to="timeline" smooth={true} offset={-40} duration={600}>
+                  <button className="btn btn-primary" onClick={ripple}>Our story</button>
+                </Link>
+                <Link to="question" smooth={true} offset={-40} duration={600}>
+                  <button className="btn btn-outline" onClick={ripple}>The big question</button>
+                </Link>
+              </div>
+              <div className="scroll-indicator">
+                <span></span>
+                <p>Scroll to explore the memories</p>
+              </div>
+            </motion.div>
+
+            <motion.div className="hero-card glass" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 1 }}>
+              <div className="heart">❤</div>
+              <h3>To my forever Valentine</h3>
+              <p style={{ lineHeight: 1.7, color: "rgba(250,250,250,0.8)" }}>
+                Every look, every laugh, every whispered dream — all of it has been leading to this moment.
+              </p>
+              <div className="pill">With all my love</div>
+            </motion.div>
+          </header>
+
+          <Element name="timeline" className="section">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+              <h2 className="gradient-text">Our Story Timeline</h2>
+              <p style={{ marginTop: "12px", maxWidth: "620px", lineHeight: 1.7 }}>
+                A vertical timeline of every unforgettable chapter — the first spark, the special day, and the moments that made us.
+              </p>
+            </motion.div>
+            <div className="timeline">
+              <div className="parallax-orb" ref={parallaxRef}></div>
+              <motion.div className="timeline-item" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+                <div className="timeline-dot"></div>
+                <div className="timeline-card">
+                  <h3>October 12: The Day We First Met 💫</h3>
+                  <img className="image-placeholder" src={placeholderImage} alt="First meeting placeholder" loading="lazy" />
+                  <p>That very first hello felt like destiny in disguise — calm, bright, unforgettable.</p>
+                </div>
+              </motion.div>
+              <motion.div className="timeline-item" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+                <div className="timeline-dot"></div>
+                <div
+                  className="timeline-card"
+                  onMouseEnter={() => confetti({ particleCount: 60, spread: 60, origin: { y: 0.6 }, colors: ['#b76e79', '#f4e4c1'] })}
+                >
+                  <h3>November 20: Our Special Day 💕</h3>
+                  <img className="image-placeholder" src={placeholderImage} alt="Special day placeholder" loading="lazy" />
+                  <p>Our promise became real — a day wrapped in joy, glow, and the kind of love that feels like home.</p>
+                </div>
+              </motion.div>
+              <motion.div className="timeline-item" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+                <div className="timeline-dot"></div>
+                <div className="timeline-card">
+                  <h3>Favorite Moments Together</h3>
+                  <ul style={{ lineHeight: 1.8, color: "rgba(250,250,250,0.8)", paddingLeft: "18px" }}>
+                    <li>Watching Stranger Things together 📺</li>
+                    <li>Our movie night watching Sirai 🎬</li>
+                    <li>Coffee dates ☕</li>
+                    <li>Adventures to Kodaikanal & Kerala 🏔️</li>
+                  </ul>
+                </div>
+              </motion.div>
+            </div>
+          </Element>
+
+          <Element name="quiz" className="section">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <h2 className="gradient-text">How Well Do You Know Us?</h2>
+              <p style={{ marginTop: "12px", maxWidth: "640px", lineHeight: 1.7 }}>
+                A playful quiz to prove you know every detail of our love story.
+              </p>
+              <div className="progress-bar" style={{ marginTop: "16px" }}>
+                <span style={{ width: `${(score / totalQuestions) * 100}%` }}></span>
+              </div>
+              <p style={{ marginTop: "10px", fontSize: "0.9rem", color: "rgba(250,250,250,0.7)" }}>
+                Score: {score}/{totalQuestions}
+              </p>
+            </motion.div>
+            <div className="quiz-grid">
+              {quizQuestions.map((question, index) => (
+                <QuizCard
+                  key={question.id}
+                  question={question}
+                  index={index}
+                  total={totalQuestions}
+                  answers={answers}
+                  setAnswers={setAnswers}
+                />
+              ))}
+            </div>
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+              <h3 className="gradient-text">You got {score}/{totalQuestions}! You know us perfectly! 💕</h3>
+              {score === totalQuestions ? (
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={(event) => {
+                    ripple(event);
+                    confetti({ particleCount: 140, spread: 80, origin: { y: 0.7 } });
+                    scroller.scrollTo("question", { smooth: true, offset: -40 });
+                  }}
+                  style={{ marginTop: "16px" }}
+                >
+                  Something Special Awaits...
+                </button>
+              ) : null}
+            </motion.div>
+          </Element>
+
+          <Element name="question" className="section big-question">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+              <p className="eyebrow">Before we start our forever journey...</p>
+              <h2 className="gradient-text">{typedText}</h2>
+              <div className="buttons">
+                <button className="btn yes-btn" onClick={(event) => { ripple(event); handleYes(); }}>YES</button>
+                {!noHidden ? (
+                  <button
+                    className="no-btn"
+                    style={{ transform: `translate(${noPos.x}px, ${noPos.y}px) scale(${noPos.scale})`, transition: `transform ${Math.max(0.05, 0.2 - noAttempts * 0.03)}s ease` }}
+                    onMouseEnter={moveNo}
+                    onClick={moveNo}
+                  >
+                    No
+                  </button>
+                ) : null}
+              </div>
+              <p style={{ color: "rgba(250,250,250,0.7)", marginTop: "10px" }}>
+                (Tip: the NO button is playful 😄)
+              </p>
+            </motion.div>
+          </Element>
+
+          <AnimatePresence>
+            {showReveal ? (
+              <Element name="reveal" className="section">
+                <motion.div
+                  className="reveal glass"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.8 }}
+                  style={{ padding: "32px" }}
+                >
+                  <h2 className="gradient-text">Our Forever Starts Here</h2>
+                  <p style={{ lineHeight: 1.8 }}>
+                    From that first day on October 12, <br />
+                    To our special November 20, <br />
+                    Every coffee date, every Stranger Things episode, <br />
+                    Every adventure from Kodaikanal to Kerala, <br />
+                    Every moment with you has been perfect. <br /><br />
+                    You're my favorite person, <br />
+                    My Korean food buddy, <br />
+                    My Sirai movie partner, <br />
+                    My everything. <br /><br />
+                    Will you be my Valentine? ❤️
+                  </p>
+                  <div className="carousel">
+                    <div className="carousel-frame">
+                      <AnimatePresence mode="wait">
+                        <motion.img
+                          key={gallerySlides[galleryIndex].label}
+                          src={gallerySlides[galleryIndex].src}
+                          alt={gallerySlides[galleryIndex].label}
+                          loading="lazy"
+                          initial={{ opacity: 0, scale: 1.02 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.98 }}
+                          transition={{ duration: 0.5 }}
+                        />
+                      </AnimatePresence>
+                    </div>
+                    <div className="carousel-controls">
+                      <button className="btn btn-outline" onClick={(event) => { ripple(event); prevSlide(); }}>
+                        Previous
+                      </button>
+                      <span className="pill">{gallerySlides[galleryIndex].label}</span>
+                      <button className="btn btn-outline" onClick={(event) => { ripple(event); nextSlide(); }}>
+                        Next
+                      </button>
+                    </div>
+                  </div>
+                  <div className="cta-row">
+                    <button className="btn btn-primary" onClick={(event) => { ripple(event); handleDownload(); }}>
+                      Download Our Memories
+                    </button>
+                    <button className="btn btn-outline" onClick={(event) => { ripple(event); handleShare(); }}>
+                      Share the Love
+                    </button>
+                  </div>
+                </motion.div>
+              </Element>
+            ) : null}
+          </AnimatePresence>
+
+          <footer style={{ textAlign: "center", color: "rgba(250,250,250,0.6)" }}>
+            Crafted in black & rose gold for a once-in-a-lifetime proposal.
+          </footer>
+
+          {toast ? <div className="toast">{toast}</div> : null}
+          {secretOpen ? (
+            <div className="hidden-gallery" onClick={() => setSecretOpen(false)}>
+              <div className="panel">
+                <h2 className="gradient-text">Secret Message</h2>
+                <p>Every moment with you is a quiet miracle. Thank you for choosing this love. ✨</p>
+                <p style={{ color: "rgba(250,250,250,0.7)" }}>Tap anywhere to close.</p>
+              </div>
+            </div>
+          ) : null}
+          <audio ref={audioRef} src="https://cdn.pixabay.com/download/audio/2022/11/03/audio_f059e90c87.mp3?filename=forever-126280.mp3" loop preload="none"></audio>
+        </div>
+      );
+    };
+
+    const Gallery = () => (
+      <div className="hidden-gallery" onDoubleClick={() => window.history.back()}>
+        <div className="panel">
+          <h2 className="gradient-text">Hidden Gallery ✨</h2>
+          <p>Double-click anywhere to return. Add your private photos here for an even sweeter surprise.</p>
+          <div className="gallery">
+            {["Secret smile", "Promise ring", "Midnight walk", "Handwritten notes"].map((label) => (
+              <div key={label} className="gallery-item">{label}</div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+
+    const App = () => (
+      <HashRouter>
+        <Particles />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/gallery" element={<Gallery />} />
+        </Routes>
+      </HashRouter>
+    );
+
+    const root = createRoot(document.getElementById("root"));
+    root.render(<App />);
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+  </script>
+  <style>
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+  </style>
 </body>
 </html>
