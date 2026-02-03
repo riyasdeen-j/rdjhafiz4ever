@@ -302,6 +302,83 @@
             display: none;
         }
 
+        /* Redirect Button */
+        .redirect-btn {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 50%, #ff4757 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1000;
+            font-family: 'Georgia', serif;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            animation: floatBtn 3s ease-in-out infinite;
+        }
+
+        @keyframes floatBtn {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .redirect-btn:hover {
+            animation: none;
+            transform: scale(1.08);
+            box-shadow: 0 8px 25px rgba(255, 71, 87, 0.5);
+        }
+
+        .redirect-btn .heart-icon {
+            font-size: 14px;
+            animation: heartPulse 1s ease-in-out infinite;
+        }
+
+        .redirect-btn .date-text {
+            font-size: 9px;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes heartPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .redirect-btn {
+                top: 15px;
+                right: 15px;
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+
+            .redirect-btn .heart-icon {
+                font-size: 12px;
+            }
+
+            .redirect-btn .date-text {
+                font-size: 8px;
+            }
+        }
+
         /* Logout Button */
         .logout-btn {
             position: fixed;
@@ -860,6 +937,12 @@
 
     <!-- Floating hearts background -->
     <div class="hearts" id="hearts"></div>
+
+    <!-- Redirect Button -->
+    <a href="https://my.ghazal4ever.info" class="redirect-btn" target="_blank">
+        <span><span class="heart-icon">💝</span> Valentine</span>
+        <span class="date-text">Feb 14, 2026</span>
+    </a>
 
     <!-- Logout Button -->
     <button class="logout-btn" id="logoutBtn" onclick="logout()">Logout 🚪</button>
